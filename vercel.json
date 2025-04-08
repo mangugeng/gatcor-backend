@@ -2,18 +2,18 @@
     "version": 2,
     "builds": [
         {
-            "src": "cmd/api/main.go",
+            "src": "api.go",
             "use": "@vercel/go"
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "cmd/api/main.go"
+            "dest": "api.go"
         }
     ],
     "functions": {
-        "cmd/api/main.go": {
+        "api.go": {
             "memory": 1024,
             "maxDuration": 10
         }
