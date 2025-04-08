@@ -1,6 +1,6 @@
 module github.com/mangugeng/gatcor-backend
 
-go 1.23
+go 1.21
 
 toolchain go1.24.2
 
@@ -9,9 +9,11 @@ require (
 	github.com/joho/godotenv v1.5.1
 	gorm.io/driver/postgres v1.5.11
 	gorm.io/gorm v1.25.12
+	github.com/vercel/go-bridge v0.0.0-20221108222652-296f4c6bdb6d
 )
 
 require (
+	github.com/aws/aws-lambda-go v1.47.0 // indirect
 	github.com/bytedance/sonic v1.11.6 // indirect
 	github.com/bytedance/sonic/loader v0.1.1 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect

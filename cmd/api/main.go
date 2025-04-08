@@ -1,23 +1,13 @@
 package main
 
 import (
-	"log"
-	"os"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
-	"github.com/mangugeng/gatcor-backend/config"
+	"github.com/vercel/go-bridge/go/bridge"
 )
 
-func main() {
-	// Load .env file
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file")
-	}
-
-	// Initialize database
-	_ = config.InitDB() // We'll use this later
-
+func init() {
 	// Set Gin mode
 	gin.SetMode(gin.ReleaseMode)
 
@@ -31,14 +21,10 @@ func main() {
 		})
 	})
 
-	// Get port from env
-	port := os.Getenv("APP_PORT")
-	if port == "" {
-		port = "8080"
-	}
+	// Handle all routes
+	http.Handle("/", router)
+}
 
-	// Run server
-	if err := router.Run(":" + port); err != nil {
-		log.Fatal("Failed to start server:", err)
-	}
+func main() {
+	bridge.Start(http.DefaultServeMux)
 }
