@@ -11,11 +11,5 @@
             "src": "/(.*)",
             "dest": "api.go"
         }
-    ],
-    "functions": {
-        "api.go": {
-            "memory": 1024,
-            "maxDuration": 10
-        }
-    }
+    ]
 }
