@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: gatcor-backend
+    env: go
+    buildCommand: go build -o main cmd/api/main.go
+    startCommand: ./main
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: gatcor-db
+          property: host
+      - key: DB_USER
+        fromDatabase:
+          name: gatcor-db
+          property: user
+      - key: DB_PASS
+        fromDatabase:
+          name: gatcor-db
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: gatcor-db
+          property: database
+      - key: DB_PORT
+        fromDatabase:
+          name: gatcor-db
+          property: port
+      - key: JWT_SECRET
+        generateValue: true
+      - key: APP_PORT
+        value: 8080
+
+databases:
+  - name: gatcor-db
+    databaseName: gatcor
+    user: postgres
+    plan: free
