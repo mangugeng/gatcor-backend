@@ -4,15 +4,16 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/vercel/go-bridge/go/bridge"
 )
+
+var router *gin.Engine
 
 func init() {
 	// Set Gin mode
 	gin.SetMode(gin.ReleaseMode)
 
 	// Initialize router
-	router := gin.Default()
+	router = gin.Default()
 
 	// Basic route
 	router.GET("/ping", func(c *gin.Context) {
@@ -20,11 +21,9 @@ func init() {
 			"message": "pong",
 		})
 	})
-
-	// Handle all routes
-	http.Handle("/", router)
 }
 
-func main() {
-	bridge.Start(http.DefaultServeMux)
+// Handler is the main entry point for Vercel
+func Handler(w http.ResponseWriter, r *http.Request) {
+	router.ServeHTTP(w, r)
 }
